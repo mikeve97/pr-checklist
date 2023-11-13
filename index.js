@@ -36,14 +36,14 @@ try {
         core.setOutput('pr_body', newPrBody);
     }
 
-    const octokit = new github.GitHub(token);
-    octokit.pulls.update({
-        owner: github.context.repo.owner,
-        repo: github.context.repo.repo,
-        pull_number: github.context.payload.pull_request.number,
-        body: newPrBody,
-        title: newPrTitle
-    });
+    // const octokit = new github.GitHub(token);
+    // octokit.pulls.update({
+    //     owner: github.context.repo.owner,
+    //     repo: github.context.repo.repo,
+    //     pull_number: github.context.payload.pull_request.number,
+    //     body: newPrBody,
+    //     title: newPrTitle
+    // });
 
 } catch (error) {
     core.error(error);
