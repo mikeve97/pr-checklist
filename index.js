@@ -8,7 +8,7 @@ try {
         return;
     }
 
-    const { ref: prBranchName = '', title: prTitle = '', body: prBody = '' } = github.context.payload.pull_request;
+    const { head: { ref: prBranchName = '' }, title: prTitle = '', body: prBody = '' } = github.context.payload.pull_request;
     const workItemNumber = prBranchName?.match(/^(\d+)-/)?.[1];
 
     //log all the things
