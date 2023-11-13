@@ -1,0 +1,16 @@
+name: 'PR Checklist checker'
+description: 'Checks if PR checklist is filled in'
+author: 'Mike van Es (mikeve97)'
+runs:
+  using: 'node20'
+  main: 'index.js'
+inputs:
+  token:
+    description: A GitHub access token
+    required: true
+outputs:
+  pr_title:
+    description: "Whether the PR title was updated"
+  pr_body:
+    description: "Whether the PR body was updated"
+
