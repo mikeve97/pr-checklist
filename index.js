@@ -24,7 +24,7 @@ try {
         return;
     }
 
-    if (prTitle.includes(workItem) && prBody.includes(workItem)) {
+    if (prTitle?.includes(workItem) && prBody?.includes(workItem)) {
         core.info('PR title and body already contains work item number.');
         return;
     }
