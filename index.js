@@ -13,6 +13,12 @@ try {
     const prBody = github.context.payload.pull_request.body;
     const workItem = prBranchName.split('-')[0].trim();
 
+    //log all the things
+    core.info(`PR branch name: ${prBranchName}`);
+    core.info(`PR title: ${prTitle}`);
+    core.info(`PR body: ${prBody}`);
+    core.info(`Work item: ${workItem}`);
+
     if (isNaN(workItem)) {
         core.setFailed('Branch name does not include work item number.');
         return;
@@ -36,14 +42,14 @@ try {
         core.setOutput('pr_body', newPrBody);
     }
 
-    // const octokit = new github.GitHub(token);
-    // octokit.pulls.update({
-    //     owner: github.context.repo.owner,
-    //     repo: github.context.repo.repo,
-    //     pull_number: github.context.payload.pull_request.number,
-    //     body: newPrBody,
-    //     title: newPrTitle
-    // });
+    const octokit = new github.GitHub(token);
+    octokit.pulls.update({
+        owner: github.context.repo.owner,
+        repo: github.context.repo.repo,
+        pull_number: github.context.payload.pull_request.number,
+        body: newPrBody,
+        title: newPrTitle
+    });
 
 } catch (error) {
     core.error(error);
