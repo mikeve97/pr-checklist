@@ -4,7 +4,7 @@ const github = require('@actions/github');
 try {
     const token = core.getInput('token');
     if (!token) {
-        core.setFailed('jissing GitHub access token.');
+        core.setFailed('Missing GitHub access token.');
         return;
     }
 
