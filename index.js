@@ -45,7 +45,7 @@ try {
         core.setOutput('pr_body', newPrBody);
     }
 
-    const octokit = new github.GitHub(token);
+    const octokit = github.getOctokit(token);
     octokit.pulls.update({
         owner: github.context.repo.owner,
         repo: github.context.repo.repo,
