@@ -16,20 +16,15 @@ try {
     }
 
     const matches = [...prBody.matchAll(/(?:^|\n)\s*-\s+\[([ xX])\]\s+((?!~).*)/g)];
-    core.info(`Tasks are \n ${matches.join(", ")}`);
     const incompleteList = [];
-    matches.forEach(match => {
-        core.info(`Found match: ${match.join(", ")} match length ${match.length}`);
-        const isComplete = match[1] != " ";
-        core.info(`Found task: ${match[2]}`);
 
-        if (!isComplete) {
-            incompleteList.push(match[2]);
-        }
+    matches.forEach(match => {
+        const isComplete = match[1] != " ";
+        !isComplete && incompleteList.push(match[2]);
     })
 
     if (incompleteList.length > 0) {
-        core.setFailed(`Incomplete tasks: ${incompleteList.join(", ")}`);
+        core.setFailed(`Incomplete tasks: \n ${incompleteList.join("\n")}`);
         return;
     }
 } catch (error) {
