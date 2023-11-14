@@ -8,10 +8,10 @@ try {
         return;
     }
 
-    const prBody = github.context.payload.pull_request.body || '';
+    const prBody = github.context.payload.pull_request.body || false;
 
-    if (prBody.some(x => x)) {
-        core.setFailed('Body does not include a checklist');
+    if (!prBody) {
+        core.setFailed('Missing PR body.');
         return;
     }
 
