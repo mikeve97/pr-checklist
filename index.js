@@ -8,13 +8,30 @@ try {
         return;
     }
 
-    const prBody =  github.context.payload.pull_request.body || '';
-	
+    const prBody = github.context.payload.pull_request.body || '';
+
     if (prBody.some(x => x)) {
         core.setFailed('Body does not include a checklist');
         return;
     }
-	
+
+    const matches = [...prBody.matchAll(/(?:^|\n)\s*-\s+\[([ xX])\]\s+((?!~).*)/g)];
+    core.info(`Tasks are \n ${matches.join(", ")}`);
+    const incompleteList = [];
+    matches.forEach(match => {
+        core.info(`Found match: ${match.join(", ")}`);
+        const isComplete = item[1] != " ";
+        core.info(`Found task: ${match[2]}`);
+
+        if (!isComplete) {
+            incompleteList.push(match[2]);
+        }
+    })
+
+    if (incompleteList.length > 0) {
+        core.setFailed(`Incomplete tasks: ${incompleteList.join(", ")}`);
+        return;
+    }
 } catch (error) {
     core.error(error);
     core.setFailed(error.message);
