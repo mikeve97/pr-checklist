@@ -19,8 +19,8 @@ try {
     core.info(`Tasks are \n ${matches.join(", ")}`);
     const incompleteList = [];
     matches.forEach(match => {
-        core.info(`Found match: ${match.join(", ")}`);
-        const isComplete = item[1] != " ";
+        core.info(`Found match: ${match.join(", ")} match length ${match.length}`);
+        const isComplete = match[1] != " ";
         core.info(`Found task: ${match[2]}`);
 
         if (!isComplete) {
